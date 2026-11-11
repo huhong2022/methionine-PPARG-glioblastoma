@@ -1,0 +1,62 @@
+Validated software environment
+==============================
+
+All six workflows were successfully run in the environment below. The five
+submitted R sessionInfo.txt records were identical.
+
+R environment
+-------------
+- R 4.5.0 (2025-04-11 ucrt)
+- Platform: x86_64-w64-mingw32/x64
+- Operating system: Windows 10 x64, build 19044
+- Bioconductor 3.21.1
+
+CRAN packages
+-------------
+- ggplot2 4.0.3
+- ggrepel 0.9.6
+- pheatmap 1.0.13
+- RColorBrewer 1.1-3
+- cowplot 1.2.0
+- circlize 0.4.18
+- ggsci 5.2.0
+- patchwork 1.3.2
+- Seurat 5.4.0
+- SeuratObject 5.2.0
+- scales 1.4.0
+- dplyr 1.2.1
+- tidyr 1.3.2
+- ggpubr 1.0.0
+- harmony 2.0.5
+- sctransform 0.4.2
+- uwot 0.2.3
+
+Bioconductor packages
+---------------------
+- limma 3.64.3
+- GSVA 2.2.1
+- clusterProfiler 4.16.0
+- BiocParallel 1.42.1
+- ComplexHeatmap 2.24.1
+- fgsea 1.34.2
+
+Other R packages
+----------------
+- estimate 1.0.13
+- GseaVis 0.1.1
+
+External resource
+-----------------
+- MSigDB C5 Gene Ontology gene sets, version 7.4, symbols GMT
+
+Image analysis
+--------------
+- ImageJ 1.54f
+- Bio-Formats plugins 7.0.0 (`bio-formats_plugins-7.0.0`)
+
+Reproducibility record
+----------------------
+Retain the generated sessionInfo.txt files with the analysis outputs. The
+versions above describe the environment used for the successful validation
+runs. A renv.lock file may also be generated from this environment if strict
+dependency locking is required.
