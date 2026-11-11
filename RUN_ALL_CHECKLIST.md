@@ -61,6 +61,10 @@ _NUCLEAR_ROI_CHECK.tif
 
 Do not accept fluorescence measurements from images with visibly merged nuclei, extensive missed nuclei, or background incorrectly classified as nuclei.
 
+Next, run `07_PPARg_CD68_positive_fraction.ijm` and select the folder containing aligned `_ch00` (DAPI), `_ch01` (CD68), and `_ch02` (PPARγ) image triplets. Review every `DAPI_MAXIMA_CHECK` image in `PPARg_in_CD68_Analysis/` before accepting the calculated positive-cell fractions.
+
+Finally, run `08_CD68_CD206_JACoP_colocalization.ijm` after confirming that the JACoP plugin is installed. Select the folder containing the 12 aligned TIFF pairs named `Overlay001` through `Overlay012`, where `_ch01` is CD206/green/Image A and `_ch02` is CD68/red/Image B. Inspect the individual raw JACoP text logs and confirm that all 12 rows are present in `CD68_CD206_JACoP_Analysis/CD68_CD206_JACoP_summary.csv`.
+
 ## 4. Check the expected results
 
 | Workflow | Minimum result to inspect |
@@ -71,6 +75,8 @@ Do not accept fluorescence measurements from images with visibly merged nuclei, 
 | `04_scRNA_GSE233304.R` | Split UMAP, final annotation table, PPARG patient summary, paired-test table, and paired plot |
 | `05_U251_DEG_visualization.R` | Whole-transcriptome volcano plot, transporter volcano plot, and transporter heatmap |
 | `06_PPARg_ImageJ_macro.ijm` | Pairing report, processing status, per-cell table, image summary, masks, and ROI overlays |
+| `07_PPARg_CD68_positive_fraction.ijm` | Processing status, DAPI-center checks, per-cell CD68/PPARγ calls, and PPARγ-positive fraction among CD68-positive cells |
+| `08_CD68_CD206_JACoP_colocalization.ijm` | Twelve individual JACoP logs and 12 rows of combined CD68/CD206 colocalization metrics |
 
 ## 5. Report a failed run
 

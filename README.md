@@ -8,6 +8,8 @@ This repository contains reproducible analysis code supporting the reported bulk
 - `04_scRNA_GSE233304.R`: GSE233304 preprocessing, global annotation, split UMAP, and patient-level paired PPARG analysis.
 - `05_U251_DEG_visualization.R`: U251 NC-versus-MR transporter heatmap and volcano plots.
 - `06_PPARg_ImageJ_macro.ijm`: recursive DAPI/PPARγ image pairing, nuclear segmentation, quality-control images, and nuclear fluorescence quantification.
+- `07_PPARg_CD68_positive_fraction.ijm`: DAPI-center detection and quantification of the PPARγ-positive fraction among CD68-positive cells.
+- `08_CD68_CD206_JACoP_colocalization.ijm`: batch CD68/CD206 colocalization analysis with JACoP and CSV export of Pearson, overlap, k1/k2, and Manders metrics.
 
 ## Directory layout
 
@@ -19,6 +21,8 @@ This repository contains reproducible analysis code supporting the reported bulk
 ├── 04_scRNA_GSE233304.R
 ├── 05_U251_DEG_visualization.R
 ├── 06_PPARg_ImageJ_macro.ijm
+├── 07_PPARg_CD68_positive_fraction.ijm
+├── 08_CD68_CD206_JACoP_colocalization.ijm
 ├── CITATION.cff
 ├── LICENSE
 ├── RUN_ALL_CHECKLIST.md
@@ -92,6 +96,8 @@ The GSE233304 files must be placed in `data/GSE233304/` with these names:
 - The ImageJ macro treats CH1 as DAPI and CH2 as PPARγ for legacy paired TIFF files. For exported channel files, `c2x` is DAPI and `c1x` is PPARγ; merged `c0-3x` files are ignored.
 - Nuclear ROIs are obtained from an 8-bit smoothed DAPI copy using an adjusted Otsu threshold, morphological closing, hole filling, and predefined area/circularity filters. Raw DAPI and PPARγ intensities are not altered by segmentation processing.
 - PPARγ background is estimated from the 10th percentile of the image histogram. The macro reports background-corrected nuclear mean fluorescence, nuclear integrated fluorescence, perinuclear mean fluorescence, and the nuclear/perinuclear ratio. Edge nuclei without a complete perinuclear ring are excluded from fluorescence summaries.
+- The PPARγ/CD68 fraction macro expects aligned `ch00` (DAPI), `ch01` (CD68), and `ch02` (PPARγ) TIFF images. DAPI intensity maxima define candidate nuclear centers. Mean 8-bit CD68 and PPARγ intensities are measured in fixed circular regions using the thresholds recorded in the macro and its generated settings file. The reported endpoint is `PPARγ-positive CD68-positive cells / all CD68-positive cells × 100%`.
+- The CD68/CD206 colocalization macro expects 12 aligned TIFF pairs named `Overlay001` through `Overlay012`, with `ch01` (CD206, green, JACoP Image A) and `ch02` (CD68, red, JACoP Image B). It converts the images to 8-bit, runs the JACoP Pearson, overlap, and Manders analyses, preserves each raw JACoP text log, and exports all parsed metrics to a combined CSV table. M1 describes the fraction of CD206 signal overlapping CD68; M2 describes the fraction of CD68 signal overlapping CD206.
 
 ## Data preparation
 
@@ -120,11 +126,15 @@ For GSE233304, the first argument is the repository root and the second is eithe
 
 Run `06_PPARg_ImageJ_macro.ijm` from Fiji using **Plugins → Macros → Run**. Select the parent image directory when prompted. The macro searches that directory and up to four subdirectory levels, then writes results to a new `PPARg_Nuclear_Analysis` folder. Inspect every `DAPI_MASK_CHECK` and `NUCLEAR_ROI_CHECK` image before accepting the quantitative output.
 
+Run `07_PPARg_CD68_positive_fraction.ijm` from Fiji in the same way. Select the folder containing aligned `_ch00`, `_ch01`, and `_ch02` TIFF triplets. The macro writes results to `PPARg_in_CD68_Analysis`. Inspect every `DAPI_MAXIMA_CHECK` image before accepting the positive-cell fractions.
+
+Run `08_CD68_CD206_JACoP_colocalization.ijm` from Fiji after installing the JACoP plugin. Select the folder containing the 12 aligned `Overlay001`–`Overlay012` `_ch01` and `_ch02` TIFF pairs. The macro writes the individual JACoP logs and combined summary to `CD68_CD206_JACoP_Analysis`.
+
 Each script writes to its own subdirectory under `results/` and records `sessionInfo.txt` there.
 
 ## Validation status
 
-All six workflows were successfully executed with the study inputs. The R analyses were validated under R 4.5.0 on Windows 10, and the image-analysis macro was validated with ImageJ 1.54f and Bio-Formats 7.0.0. Exact package versions are recorded in `software_versions.txt`. The scripts include input validation, sample-assignment audits, analysis summaries, and `sessionInfo()` output. The complete human-transporter reference list contains 576 candidates; the visualized subset consists of the 253 candidates with quantified entries in the U251 RNA-seq dataset.
+All eight workflows were successfully executed with the study inputs. The R analyses were validated under R 4.5.0 on Windows 10, and the three image-analysis macros were validated with ImageJ 1.54f and Bio-Formats 7.0.0; the CD68/CD206 macro additionally requires JACoP. Exact package versions are recorded in `software_versions.txt`. The scripts include input validation, sample-assignment audits, analysis summaries, and `sessionInfo()` output. The complete human-transporter reference list contains 576 candidates; the visualized subset consists of the 253 candidates with quantified entries in the U251 RNA-seq dataset.
 
 ## Citation
 

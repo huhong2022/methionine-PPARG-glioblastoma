@@ -1,8 +1,9 @@
 Validated software environment
 ==============================
 
-All six workflows were successfully run in the environment below. The five
-submitted R sessionInfo.txt records were identical.
+All eight workflows were successfully run in the environment below. The five
+submitted R sessionInfo.txt records were identical, and all three image-analysis
+macros were validated with their corresponding image sets.
 
 R environment
 -------------
@@ -53,6 +54,7 @@ Image analysis
 --------------
 - ImageJ 1.54f
 - Bio-Formats plugins 7.0.0 (`bio-formats_plugins-7.0.0`)
+- JACoP plugin (exact plugin version not recorded)
 
 Reproducibility record
 ----------------------

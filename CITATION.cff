@@ -8,7 +8,7 @@ title: >-
   Regulation of PPARG in Macrophages to Promote Immunosuppression in
   Glioblastoma
 type: software
-version: 1.0.0
+version: 1.1.0
 date-released: 2026-11-11
 license: MIT
 repository-code: https://github.com/huhong2022/methionine-PPARG-glioblastoma
@@ -48,8 +48,10 @@ authors:
     email: liuhuaileinsdm@hrbmu.edu.cn
 abstract: >-
   Analysis code supporting bulk RNA-seq, single-cell RNA-seq, U251 RNA-seq,
-  pathway enrichment, and PPARgamma nuclear fluorescence quantification for
-  the associated glioblastoma study. Hong Hu is the repository submitter.
+  pathway enrichment, PPARgamma nuclear fluorescence quantification, and the
+  PPARgamma-positive fraction among CD68-positive cells, and CD68/CD206
+  colocalization for the associated glioblastoma study. Hong Hu is the
+  repository submitter.
 keywords:
   - glioblastoma
   - methionine metabolism
