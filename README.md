@@ -20,7 +20,6 @@ This repository contains reproducible analysis code supporting the reported bulk
 ├── 05_U251_DEG_visualization.R
 ├── 06_PPARg_ImageJ_macro.ijm
 ├── CITATION.cff
-├── FILE_NAMING_CHANGES.md
 ├── LICENSE
 ├── RUN_ALL_CHECKLIST.md
 ├── gene_lists/
@@ -130,6 +129,12 @@ All six workflows were successfully executed with the study inputs. The R analys
 ## Citation
 
 This repository supports the manuscript *Methionine Availability Drives m6A-Dependent Regulation of PPARG in Macrophages to Promote Immunosuppression in Glioblastoma*, currently under revision and not yet accepted for publication. Hong Hu (胡鸿) is the repository submitter. Citation metadata are provided in `CITATION.cff`; the formal journal citation and DOI will be added after acceptance.
+
+Repository: https://github.com/huhong2022/methionine-PPARG-glioblastoma
+
+## Code availability
+
+All custom code used in this study is publicly available from this GitHub repository. The repository contains the complete analysis scripts, documentation, gene lists, input-file specifications, and validated software versions required to reproduce the reported analyses. Public datasets are available from the original repositories described in the study. Large datasets and files subject to third-party redistribution terms are not duplicated in this repository.
 
 ## License
 

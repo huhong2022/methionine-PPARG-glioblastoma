@@ -11,6 +11,7 @@ type: software
 version: 1.0.0
 date-released: 2026-11-11
 license: MIT
+repository-code: https://github.com/huhong2022/methionine-PPARG-glioblastoma
 authors:
   - family-names: Hu
     given-names: Hong
