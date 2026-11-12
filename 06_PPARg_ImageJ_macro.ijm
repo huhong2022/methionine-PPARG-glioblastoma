@@ -21,8 +21,8 @@ outputFolderName = "PPARg_Nuclear_Analysis";
 outputDir = inputDir + outputFolderName + File.separator;
 File.makeDirectory(outputDir);
 
-maxFolderDepth = 4;
-channelPaths = newArray(0);
+var maxFolderDepth = 4;
+var channelPaths = newArray(0);
 
 useDapiRollingBackground = false;
 rollingRadius = 35;
@@ -103,6 +103,7 @@ File.saveString(settings, settingsFile);
 // Pair DAPI and PPARg files -------------------------------------------------
 
 scanPairFiles(inputDir, 0);
+print("Candidate channel files found: " + channelPaths.length);
 
 readySamples = newArray(channelPaths.length);
 readyDapi = newArray(channelPaths.length);
@@ -191,6 +192,8 @@ for (i = 0; i < channelPaths.length; i++) {
 
 File.saveString(pairCSV, pairFile);
 File.saveString(statusCSV, statusFile);
+
+print("Matched image pairs: " + readyCount);
 
 if (readyCount == 0)
     exit("No matched DAPI and PPARg image pairs were found.");
@@ -584,7 +587,10 @@ function scanPairFiles(folder, depth) {
         lowerEntry = toLowerCase(entry);
 
         if (File.isDirectory(path)) {
-            if (indexOf(lowerEntry, toLowerCase(outputFolderName)) >= 0)
+            if (indexOf(lowerEntry, "pparg_nuclear_analysis") >= 0 ||
+                indexOf(lowerEntry, "tight_dapi_nuclear") >= 0 ||
+                indexOf(lowerEntry, "extranuclear_redgreen") >= 0 ||
+                indexOf(lowerEntry, "auto_nuclear_red") >= 0)
                 continue;
             scanPairFiles(path, depth + 1);
         } else {
@@ -593,8 +599,11 @@ function scanPairFiles(folder, depth) {
             legacyChannel = endsWith(lowerEntry, "_ch1.tif") ||
                 endsWith(lowerEntry, "_ch1.tiff") ||
                 endsWith(lowerEntry, "_ch2.tif") ||
-                endsWith(lowerEntry, "_ch2.tiff");
-            exportedChannel = indexOf(lowerEntry, "c1x") >= 0 ||
+                endsWith(lowerEntry, "_ch2.tiff") ||
+                endsWith(lowerEntry, "_ch3.tif") ||
+                endsWith(lowerEntry, "_ch3.tiff");
+            exportedChannel = indexOf(lowerEntry, "c0x") >= 0 ||
+                indexOf(lowerEntry, "c1x") >= 0 ||
                 indexOf(lowerEntry, "c2x") >= 0;
             mergedImage = indexOf(lowerEntry, "c0-3x") >= 0;
 
